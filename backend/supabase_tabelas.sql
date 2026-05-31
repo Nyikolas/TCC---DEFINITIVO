@@ -48,5 +48,10 @@ alter table usuarios enable row level security;
 alter table favoritos enable row level security;
 alter table progresso_leitura enable row level security;
 
+grant usage on schema public to service_role;
+grant select, insert, update, delete on usuarios to service_role;
+grant select, insert, update, delete on favoritos to service_role;
+grant select, insert, update, delete on progresso_leitura to service_role;
+
 -- Backend usa SERVICE_ROLE_KEY, entao ignora RLS.
 -- Se usar Supabase Auth direto no frontend depois, crie policies por auth.uid().

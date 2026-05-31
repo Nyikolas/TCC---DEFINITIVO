@@ -1,4 +1,7 @@
-import 'dotenv/config';
+import { fileURLToPath } from 'node:url';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: fileURLToPath(new URL('.env', import.meta.url)) });
 
 const { SUPABASE_URL } = process.env;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
