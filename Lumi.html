@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumi - UniRead</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f3658a9e0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="src/css/estilos.css">
+    <link rel="stylesheet" href="src/css/Lumi.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">UniRead</div>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Biblioteca.html">Biblioteca</a></li>
+            <li><a href="Autores.html">Autores</a></li>
+            <li><a href="Lumi.html">Lumi</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="Perfil.html" class="Perfil">
+                <img id="fotoPerfilNav" src="https://i.pravatar.cc/40" alt="Foto de perfil">
+            </a>
+        </div>
+    </nav>
+
+    <main class="lumi-main">
+        <div class="lumi-shell">
+            <section class="lumi-chat-card" data-lumi-chat>
+                <header class="lumi-page-header">
+                    <div class="lumi-title">
+                        <span class="lumi-title-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                        <div>
+                            <h1>Lumi</h1>
+                            <p>Me conte como voce esta se sentindo e eu recomendo uma obra.</p>
+                        </div>
+                    </div>
+                    <span class="lumi-status">Online</span>
+                </header>
+
+                <div class="lumi-messages" data-lumi-messages>
+                    <div class="lumi-message bot">
+                        <div class="lumi-bubble">
+                            Oi! Eu sou a Lumi. Escreva algo como "estou triste", "quero algo calmo" ou "estou animado" que eu escolho uma leitura para o seu momento.
+                        </div>
+                    </div>
+                </div>
+
+                <form class="lumi-form" data-lumi-form>
+                    <input type="text" data-lumi-input placeholder="Como voce esta se sentindo?" autocomplete="off">
+                    <button type="submit" aria-label="Enviar mensagem">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+            </section>
+
+            <aside class="lumi-side-panel">
+                <h2>Recomendacoes por sentimento</h2>
+                <p>
+                    A Lumi analisa palavras da sua mensagem, identifica o clima emocional e indica uma obra do catalogo da UniRead.
+                </p>
+                <div class="lumi-chips">
+                    <span>triste</span>
+                    <span>ansioso</span>
+                    <span>feliz</span>
+                    <span>cansado</span>
+                    <span>calmo</span>
+                    <span>curioso</span>
+                    <span>raiva</span>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="src/Js/Recompensas.js"></script>
+    <script src="src/Js/Lumi.js"></script>
+    <script src="src/Js/Perfil.js"></script>
+</body>
+
+</html>

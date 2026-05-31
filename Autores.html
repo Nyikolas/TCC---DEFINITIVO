@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniRead - Autores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f3658a9e0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="src/css/Autores.css">
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar">
+        <div class="logo">UniRead</div>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Biblioteca.html">Biblioteca</a></li>
+            <li><a href="Autores.html" class="ativo">Autores</a></li>
+            <li><a href="Lumi.html">Lumi</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="Perfil.html" class="Perfil">
+                <img id="fotoPerfilNav" src="https://i.pravatar.cc/40" alt="Perfil">
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="autores-hero">
+        <p class="hero-label">✦ Criadores do UniRead</p>
+        <h1 class="titulo-autores">Conheça os Autores</h1>
+        <p class="hero-sub">Os criadores por trás das obras do nosso UniRead</p>
+
+        <div class="barra-pesquisa">
+            <i class="fa-solid fa-magnifying-glass icone-busca"></i>
+            <input type="text" id="campo-pesquisa" placeholder="Pesquisar por nome de autor...">
+            <button class="btn-buscar" id="btn-buscar">
+                <i class="fa-solid fa-search"></i> Buscar
+            </button>
+        </div>
+
+        <div class="filtros-rapidos">
+            <button class="tag ativo" data-filtro="tudo">
+                <i class="fa-solid fa-border-all"></i> Todos
+            </button>
+            <button class="tag" data-filtro="manga">
+                <i class="fa-solid fa-torii-gate"></i> Mangás
+            </button>
+            <button class="tag" data-filtro="livro">
+                <i class="fa-solid fa-book"></i> Livros
+            </button>
+            <button class="tag" data-filtro="hq">
+                <i class="fa-solid fa-mask"></i> HQs
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== STATS BAR ===== -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-numero" id="stat-autores">10</span>
+            <span class="stat-label">Autores</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-numero">10</span>
+            <span class="stat-label">Obras no acervo</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-numero">3</span>
+            <span class="stat-label">Categorias</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-numero">5</span>
+            <span class="stat-label">Países</span>
+        </div>
+    </div>
+
+    <!-- ===== CONTAINER PRINCIPAL ===== -->
+    <main class="container-autores">
+
+        <div class="secao-header">
+            <span class="secao-titulo">
+                Exibindo <strong id="count-exibindo">5</strong> autores
+            </span>
+            
+            <!-
+            <select class="select-ordem" id="select-ordem">
+                <option value="nome">Nome A → Z</option>
+                <option value="obras">Mais obras</option>
+                <option value="nota">Maior avaliação</option>
+            </select>
+        </div>
+
+        <!-- GRID DE CARDS -->
+        <div class="grid-autores" id="grid-autores"></div>
+
+        <!-- ESTADO VAZIO -->
+        <div class="grid-vazio" id="grid-vazio">
+            <i class="fa-solid fa-user-slash icone-vazio"></i>
+            <p>Nenhum autor encontrado</p>
+            <small>Tente outro nome ou limpe os filtros</small>
+        </div>
+
+    </main>
+
+    <!-- ===== MODAL DE PERFIL ===== -->
+    <div class="perfil-overlay" id="perfil-overlay">
+        <div class="perfil-modal" id="perfil-modal" role="dialog" aria-modal="true" aria-labelledby="modal-nome">
+
+            <div class="perfil-header-bg" id="modal-header-bg">
+                <div class="perfil-header-bg-inner" id="modal-bg-inner"></div>
+                <div class="perfil-header-bg-pattern"></div>
+                <button class="btn-fechar" id="btn-fechar" aria-label="Fechar perfil">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="perfil-conteudo">
+
+                <div class="perfil-topo">
+                    <div class="perfil-avatar-grande" id="modal-avatar"></div>
+                    <div class="perfil-identificacao">
+                        <div class="perfil-nome" id="modal-nome"></div>
+                        <div class="perfil-meta" id="modal-meta"></div>
+                    </div>
+                </div>
+
+                <div class="perfil-tags-grandes" id="modal-tags"></div>
+
+                <p class="perfil-bio-titulo">Sobre o autor</p>
+                <p class="perfil-bio-texto" id="modal-bio"></p>
+
+                <div class="perfil-divisor"></div>
+
+                <div class="obras-titulo" id="modal-obras-titulo">Obras no acervo</div>
+                <div class="obras-grid" id="modal-obras"></div>
+
+            </div>
+        </div>
+    </div>
+    
+    <script src="src/Js/Recompensas.js"></script>
+    <script src="src/Js/Autores.js"></script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>UniRead - Biblioteca</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f3658a9e0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="src/css/estilos.css">
+    <link rel="stylesheet" href="src/css/Biblioteca.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">UniRead</div>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Biblioteca.html" class="ativo">Biblioteca</a></li>
+            <li><a href="Autores.html">Autores</a></li>
+            <li><a href="Lumi.html">Lumi</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="Perfil.html" class="Perfil">
+                <img id="fotoPerfilNav" src="https://i.pravatar.cc/40" alt="Perfil">
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO DA BIBLIOTECA -->
+    <div class="biblioteca-hero">
+        <h1 class="titulo-busca">Encontre sua próxima leitura</h1>
+        <p class="heroi-sub">Mangás, HQs e Livros em um só lugar</p>
+
+        <!-- BARRA DE PESQUISA -->
+        <div class="barra-pesquisa">
+            <i class="fa-solid fa-magnifying-glass icone-busca"></i>
+            <input type="text" id="campo-pesquisa" placeholder="Pesquisar por título, autor ou gênero...">
+            <button class="btn-lupa" id="btn-buscar">Buscar</button>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="filtros-rapidos">
+            <button class="tag ativo" onclick="filter('Tudo')">
+                <i class="fa-solid fa-border-all"></i> Tudo
+            </button>
+            <button class="tag" onclick="filter('Mangás')">
+                <i class="fa-solid fa-torii-gate"></i> Mangás
+            </button>
+            <button class="tag" onclick="filter('Livros')">
+                <i class="fa-solid fa-book"></i> Livros
+            </button>
+            <button class="tag" onclick="filter('HQs')">
+                <i class="fa-solid fa-mask"></i> HQs
+            </button>
+        </div>
+    </div>
+
+    <!-- GRID DE RESULTADOS -->
+    <div class="container-resultados">
+
+        <!-- Cabeçalho dos resultados -->
+        <div class="resultados-header">
+            <span class="resultados-count" id="resultadosCount">10 obras encontradas</span>
+            <div class="resultados-ordenar">
+                <select id="selectOrdem" class="select-ordem" title="Ordenar resultados">
+                    <option value="relevancia">Relevância</option>
+                    <option value="nota">Maior nota</option>
+                    <option value="titulo">A → Z</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- GRID -->
+        <div class="grid-resultados" id="grid-biblioteca">
+
+            <div class="card" data-categoria="Mangá" data-autor="eiichiro oda" data-nota="4.9" data-badge="popular" onclick="goToDescription('One Piece')">
+                <div class="card-badge popular">🔥 Popular</div>
+                <div class="card-img-wrap">
+                    <img src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_mfpdoof6nd6ej6n2dlhtgsg660/-S897-FWEBP" alt="One Piece">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Mangá</span>
+                    <h4 class="card-titulo">One Piece</h4>
+                    <p class="card-autor">Eiichiro Oda</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="nota">4.9</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-categoria="HQ" data-autor="varios" data-nota="4.7" data-badge="novo" onclick="goToDescription('Batman: Absolute')">
+                <div class="card-badge novo">✨ Novo</div>
+                <div class="card-img-wrap">
+                    <img src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_mose922j392el6h2q2c1nv8g7l/-S897-FWEBP" alt="Batman">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">HQ</span>
+                    <h4 class="card-titulo">Batman: Absolute</h4>
+                    <p class="card-autor">Vários autores</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                        </div>
+                        <span class="nota">4.7</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-categoria="Livro" data-autor="j.r.r. tolkien" data-nota="4.8" data-badge="popular" onclick="goToDescription('Senhor Dos Anéis')">
+                <div class="card-badge popular">🔥 Popular</div>
+                <div class="card-img-wrap">
+                    <img src="https://m.media-amazon.com/images/I/51lkAKXgK4L._SY445_SX342_QL70_ML2_.jpg" alt="Senhor dos Anéis">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Livro</span>
+                    <h4 class="card-titulo">Senhor Dos Anéis</h4>
+                    <p class="card-autor">J.R.R. Tolkien</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="nota">4.8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-categoria="Mangá" data-autor="chu-gong" data-nota="4.6" data-badge="popular" onclick="goToDescription('Solo Leveling')">
+                <div class="card-badge popular">🔥 Popular</div>
+                <div class="card-img-wrap">
+                    <img src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_dapavu4fhd04bcjagc4v0sge0a/-S897-FWEBP" alt="Solo Leveling">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Mangá</span>
+                    <h4 class="card-titulo">Solo Leveling</h4>
+                    <p class="card-autor">Chu-Gong</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="nota">4.6</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-categoria="Mangá" data-autor="kentaro miura" data-nota="4.9" data-badge="popular" onclick="goToDescription('Berserk')">
+                <div class="card-badge popular">🔥 Popular</div>
+                <div class="card-img-wrap">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Berserk_vol01.png" alt="Berserk">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Mangá</span>
+                    <h4 class="card-titulo">Berserk</h4>
+                    <p class="card-autor">Kentaro Miura</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="nota">4.9</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-categoria="Livro" data-autor="george r.r. martin" data-nota="4.5" data-badge="popular" onclick="goToDescription('Game of Thrones')">
+                <div class="card-badge popular">🔥 Popular</div>
+                <div class="card-img-wrap">
+                    <img src="https://i2.wp.com/m.media-amazon.com/images/I/518dGmVCDfL.jpg?w=150&resize=150,200&ssl=1" alt="Game of Thrones">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Livro</span>
+                    <h4 class="card-titulo">Game of Thrones</h4>
+                    <p class="card-autor">George R.R. Martin</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                        </div>
+                        <span class="nota">4.5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card" data-categoria="Mangá" data-autor="inio asano" data-nota="4.8" data-badge="popular" onclick="goToDescription('Boa Noite Punpun')">
+                <div class="card-badge popular">🔥 Popular</div>
+                <div class="card-img-wrap">
+                    <img src="https://m.media-amazon.com/images/I/51EQ5jMPsHL._SY425_.jpg" alt="Boa Noite Punpun">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Mangá</span>
+                    <h4 class="card-titulo">Boa Noite Punpun</h4>
+                    <p class="card-autor">Inio Asano</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="nota">4.8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-categoria="Livro" data-autor="stephen king" data-nota="4.7" data-badge="popular" onclick="goToDescription('O Iluminado')">
+                <div class="card-badge popular">🔥 Popular</div>
+                <div class="card-img-wrap">
+                    <img src="https://m.media-amazon.com/images/I/81Q+pJi4NjL._SY466_.jpg" alt="O Iluminado">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Livro</span>
+                    <h4 class="card-titulo">O Iluminado</h4>
+                    <p class="card-autor">Stephen King</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="nota">4.7</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-categoria="Livro" data-autor="Megan Devine" data-nota="4.6" data-badge="novo" onclick="goToDescription('Tudo bem não estar tudo bem')">
+                <div class="card-badge novo">✨ Novo</div>
+                <div class="card-img-wrap">
+                    <img src="https://m.media-amazon.com/images/I/41VxKlcyCbL._SY445_SX342_ML2_.jpg" alt="Tudo bem não estar tudo bem">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Livro</span>
+                    <h4 class="card-titulo">Tudo bem não estar tudo bem</h4>
+                    <p class="card-autor">Megan Devine</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="nota">4.6</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-categoria="Livro" data-autor="c.j. tudor" data-nota="4.5" data-badge="novo" onclick="goToDescription('O Homem de Giz')">
+                <div class="card-badge novo">✨ Novo</div>
+                <div class="card-img-wrap">
+                    <img src="https://m.media-amazon.com/images/I/71oxE2vkZmL._SY466_.jpg" alt="O Homem de Giz">
+                    <div class="card-overlay">
+                        <button class="overlay-btn">▶ Ler agora</button>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <span class="card-categoria">Livro</span>
+                    <h4 class="card-titulo">O Homem de Giz</h4>
+                    <p class="card-autor">C.J. Tudor</p>
+                    <div class="card-avaliacao">
+                        <div class="estrelas">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <span class="nota">4.5</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+        
+
+        <!-- Estado vazio -->
+        <div class="grid-vazio" id="gridVazio" hidden>
+            <span>🔍</span>
+            <p>Nenhuma obra encontrada para "<span id="termoVazio"></span>"</p>
+            <small>Tente outro termo ou limpe os filtros</small>
+        </div>
+
+        <!-- Loading -->
+        <div class="grid-loading" id="gridLoading" hidden>
+            <div class="spinner"></div>
+            <p>Buscando obras...</p>
+        </div>
+
+    </div>
+
+    <script src="src/Js/Recompensas.js"></script>
+    <script src="src/Js/Biblioteca.js"></script>
+
+    <script>
+        function goToDescription(title) {
+            window.location.href = 'Descrição.html?title=' + encodeURIComponent(title);
+        }
+    </script>
+
+</body>
+</html>

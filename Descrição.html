@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descrição - UniRead</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./src/imagens/Favicon.jpg   ">
+    <script src="https://kit.fontawesome.com/5f3658a9e0.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="src/css/estilos.css">
+    <link rel="stylesheet" href="src/css/descrição.css">
+    <link rel="stylesheet" href="src/css/perfil.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">UniRead</div>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Biblioteca.html">Biblioteca</a></li>
+            <li><a href="Autores.html">Autores</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="Perfil.html" class="Perfil">
+                <img id="fotoPerfilNav" src="https://i.pravatar.cc/40">
+            </a>
+        </div>
+    </nav>
+    <div class="descricao-container">
+        <div class="descricao-topo">
+            <img class="descricao-capa" id="descricao-capa" src="" alt="Capa">
+            <div class="descricao-info">
+                <h1 id="descricao-titulo">Título</h1>
+                <i id="btn-favorito" class="fa-regular fa-heart"></i>
+                <div class="subtitulo" id="descricao-categoria">Categoria</div>
+                <div class="subtitulo" id="descricao-autor">Autor</div>
+                <div class="subtitulo" id="descricao-chapters">Capítulos: -</div>
+                <p class="descricao-texto" id="descricao-sinopse">Sinopse</p>
+                <a id="botao-ler" class="btn-ler">Ir para Leitura</a>
+            </div>
+        </div>
+
+        <section class="lista-capitulos">
+            <h2>Capítulos Disponíveis</h2>
+            <div id="capitulos-lista"></div>
+        </section>
+
+        <section class="lista-outras">
+            <h2>Outras obras</h2>
+            <div id="outras-obras"></div>
+        </section>
+    </div>
+
+    <script src="src/Js/Recompensas.js"></script>
+    <script src="src/Js/Descricao.js"></script>
+    <script src="src/Js/Perfil.js"></script>
+    <script src="src/Js/index.js"></script>
+
+</body>
+
+</html>

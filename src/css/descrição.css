@@ -1,0 +1,167 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* BODY */
+body {
+  background-color: #0d0d12;
+  color: white;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 15px 50px;
+  background: #111;
+  position: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 800;
+  color: #a855f7;
+  letter-spacing: 1px;
+
+}
+
+/* Menu de Cima da Página */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #ddd;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  color: #a855f7;
+}
+
+.header-titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#btn-favorito {
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #a855f7; /* Cor roxa do seu tema */
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#btn-favorito:hover {
+    transform: scale(1.2);
+}
+
+/* Classe que o JS vai aplicar quando estiver favoritado */
+#btn-favorito.favoritado {
+    color: #a855f7; /* Cor vermelha para o favorito ativo */
+}
+
+.descricao-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.descricao-capa {
+    width: 220px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.descricao-topo {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.descricao-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.descricao-info h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.descricao-info .subtitulo {
+    color: #a0a0a0;
+    font-size: 16px;
+}
+
+.descricao-info .descricao-texto {
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+.btn-ler {
+    margin-top: 18px;
+    width: fit-content;
+    display: inline-block;
+    background: #a855f7;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.lista-outras {
+    margin-top: 30px;
+}
+
+.lista-outras h2 {
+    margin-bottom: 12px;
+}
+
+.lista-outras button {
+    border: 1px solid #333;
+    background: #14142a;
+    color: white;
+    margin: 3px 5px 3px 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.lista-capitulos {
+    margin-top: 20px;
+    background: #101028;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.lista-capitulos span {
+    display: block;
+    margin-bottom: 5px;
+}
+/* Tema aplicado pelo perfil */
+.logo,
+.subtitulo,
+#btn-favorito,
+#btn-favorito.favoritado {
+  color: var(--cor-principal);
+}
+
+.btn-ler {
+  background: var(--cor-principal);
+}

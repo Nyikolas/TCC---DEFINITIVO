@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - UniRead</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f3658a9e0.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="src/css/estilos.css">
+    <link rel="stylesheet" href="src/css/perfil.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">UniRead</div>
+        <div class="menu">
+        <div class="nav-right">
+            <a href="Perfil.html" class="Perfil">
+                <img id="fotoPerfilNav" src="https://i.pravatar.cc/40" alt="Foto de perfil">
+            </a>
+        </div>
+    </nav>
+
+    <main class="perfil-main">
+        <div class="perfil-container">
+
+            <!-- ═══════════════════════════════════════
+                 COLUNA ESQUERDA
+            ═══════════════════════════════════════ -->
+            <div class="perfil-esquerda">
+
+                <!-- CARD PRINCIPAL DO PERFIL -->
+                <div class="perfil-card">
+                    <div class="avatar-container" id="avatarContainer">
+                        <img id="molduraConquista" class="moldura" alt="Moldura">
+                        <img class="avatar" src="https://i.pravatar.cc/150" id="fotoPerfil" alt="Avatar">
+                        <input type="file" id="uploadFoto" accept="image/*" style="display:none;">
+                    </div>
+
+                    <h2 id="nomeUsuario">Usuário</h2>
+                    <p class="perfil-bio">Bem-vindo ao seu perfil!</p>
+
+                    <!-- NÍVEL E XP -->
+                    <div class="nivel-container">
+                        <div class="nivel-topo">
+                            <span class="nivel-badge">⚔️ Nível <span id="nivelAtual">1</span></span>
+                            <span class="nivel-titulo" id="tituloNivel">Iniciante</span>
+                        </div>
+                        <div class="xp-barra-bg">
+                            <div class="xp-barra-fill" id="xpBarra" style="width:0%"></div>
+                        </div>
+                        <div class="xp-texto">
+                            <span id="xpAtual">0</span> / <span id="xpMax">100</span> XP
+                        </div>
+                    </div>
+
+                    <!-- ESTATÍSTICAS -->
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-num" id="statObras">0</span>
+                            <span class="stat-label">Obras lidas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num" id="statHoras">0h</span>
+                            <span class="stat-label">Horas lidas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num" id="statDias">0</span>
+                            <span class="stat-label">Dias seguidos</span>
+                        </div>
+                    </div>
+
+                    <!-- PROGRESSO TERROR (botão de simulação) -->
+                    <div class="progresso-conquista">
+                        <small>Progresso Terror: <span id="qtdLida">0</span>/5</small>
+                        <button id="resetarXP">🔄 Resetar Tudo</button>
+                        <button onclick="testarConquista()" class="btn-simular">+ Simular Leitura</button>
+                    </div>
+
+                    <button class="logout-btn" id="logoutBtn">🏠 Tela Inicial</button>
+                    <button class="sair-btn" id="sairBtn">🚪 Sair</button>
+                </div>
+
+                <!-- CONQUISTAS -->
+                <div class="conquistas-card">
+                    <h3>🏆 Conquistas</h3>
+                    <div class="conquistas-grid">
+
+                        <div class="conquista-item desbloqueada" title="Leu a primeira obra">
+                            <div class="conquista-icone">📖</div>
+                            <span>Primeira Leitura</span>
+                        </div>
+
+                        <div class="conquista-item bloqueada" id="conquista-terror" title="Leia 5 obras de Terror">
+                            <div class="conquista-icone">👻</div>
+                            <span>Mestre do Terror</span>
+                        </div>
+
+                        <div class="conquista-item bloqueada" id="conquista-avido" title="Leia 10 obras">
+                            <div class="conquista-icone">🔥</div>
+                            <span>Leitor Ávido</span>
+                        </div>
+
+                        <div class="conquista-item bloqueada" title="Leia por 7 dias seguidos">
+                            <div class="conquista-icone">📅</div>
+                            <span>7 Dias Seguidos</span>
+                        </div>
+
+                        <div class="conquista-item bloqueada" id="conquista-otaku" title="Leia 5 mangás">
+                            <div class="conquista-icone">⛩️</div>
+                            <span>Otaku</span>
+                        </div>
+
+                        <div class="conquista-item bloqueada" id="conquista-heroi" title="Leia 5 HQs">
+                            <div class="conquista-icone">🦸</div>
+                            <span>Herói das HQs</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- FIM COLUNA ESQUERDA -->
+
+            <!-- ═══════════════════════════════════════
+                 COLUNA DIREITA
+            ═══════════════════════════════════════ -->
+            <div class="perfil-direita">
+
+                <!-- CARD DE RECOMPENSAS (molduras + paletas) -->
+                <!-- O Recompensas.js preenche este card automaticamente -->
+                <div class="recompensas-card">
+                    <h3>🎁 Recompensas</h3>
+                    <p class="recomp-aviso" style="margin-bottom:16px">
+                        Desbloqueie molduras e paletas completando conquistas de leitura.
+                    </p>
+                    <div id="card-recompensas">
+                        <!-- preenchido por Recompensas.js -->
+                        <p style="color:#555;font-size:13px">Carregando recompensas...</p>
+                    </div>
+                </div>
+
+                <div class="favoritos">
+                    <h3>⭐ Favoritos</h3>
+                    <div id="listaFavoritos"></div>
+                </div>
+
+                <!-- FIM COLUNA DIREITA -->
+
+            </div>
+        </div>
+    </main>
+    <!-- ═══════════════════════════════════════
+         SCRIPTS — ordem importa!
+         1. Descricao.js  → dados das obras (necessário para favoritos)
+         2. Recompensas.js → sistema de molduras e paletas
+         3. PerfilTema.js  → XP e conquistas
+         4. Perfil.js      → botões, foto, favoritos
+    ═══════════════════════════════════════ -->
+    <script src="src/Js/Descricao.js"></script>
+    <script src="src/Js/Recompensas.js"></script>
+    <script src="src/Js/PerfilTema.js"></script>
+    <script src="src/Js/Perfil.js"></script>
+
+</body>
+
+</html>

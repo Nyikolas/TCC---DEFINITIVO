@@ -1,0 +1,678 @@
+/* RESET */
+:root {
+  --cor-fundo: #0d0d15;
+  --cor-principal: #a855f7;
+  --cor-principal-clara: #c084fc;
+  --cor-card: #13131f;
+  --cor-card-secundario: #171724;
+  --cor-navbar: rgba(17, 17, 17, 0.95);
+  --cor-borda: rgba(168, 85, 247, 0.2);
+  --cor-borda-hover: rgba(168, 85, 247, 0.55);
+  --cor-destaque: rgba(168, 85, 247, 0.12);
+  --cor-texto-suave: #aaa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* BODY */
+body {
+  background-color: var(--cor-fundo);
+  color: white;
+}
+
+/* ===================== NAVBAR ===================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: var(--cor-navbar);
+  border-bottom: 1px solid var(--cor-borda);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--cor-principal);
+  letter-spacing: 1px;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #aaa;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+/* Sublinhado animado no hover */
+.menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--cor-principal);
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+.menu a:hover {
+  color: #ffffff;
+}
+
+.menu a:hover::after {
+  width: 100%;
+}
+
+/* Avatar do perfil */
+#fotoPerfilNav {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--cor-principal);
+  object-fit: cover;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+#fotoPerfilNav:hover {
+  border-color: var(--cor-principal-clara);
+  transform: scale(1.05);
+}
+
+/* ===================== BANNER CARROSSEL ===================== */
+.banner-carrossel {
+  position: relative;
+  width: min(1120px, calc(100% - 48px));
+  margin: 22px auto 10px;
+  border-radius: 14px;
+  overflow: hidden;
+  height: 285px;
+}
+
+.slides-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+.slide.ativo {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.45);
+}
+
+.slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right,
+      rgba(13, 13, 21, 0.92) 30%,
+      rgba(13, 13, 21, 0.3) 70%,
+      transparent 100%);
+}
+
+/* TEXTO DO BANNER */
+.banner-texto {
+  position: absolute;
+  bottom: 32px;
+  left: 46px;
+  max-width: 430px;
+  z-index: 2;
+}
+
+.badge-categoria {
+  display: inline-block;
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  color: #c084fc;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.banner-texto h1 {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.banner-texto p {
+  font-size: 13px;
+  margin-bottom: 16px;
+  color: #bbb;
+  line-height: 1.6;
+}
+
+.banner-texto button {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 30px;
+  background: #a855f7;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.banner-texto button:hover {
+  background: #9333ea;
+  transform: translateY(-2px);
+}
+
+/* SETAS */
+.seta {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seta:hover {
+  background: rgba(168, 85, 247, 0.4);
+  border-color: rgba(168, 85, 247, 0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.seta-esq {
+  left: 18px;
+}
+
+.seta-dir {
+  right: 18px;
+}
+
+/* BOLINHAS */
+.indicadores {
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dot.ativo {
+  background: #a855f7;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .banner-carrossel {
+    width: calc(100% - 28px);
+    margin: 14px auto 8px;
+    height: 230px;
+  }
+
+  .banner-texto {
+    left: 22px;
+    bottom: 24px;
+    max-width: calc(100% - 70px);
+  }
+
+  .banner-texto h1 {
+    font-size: 26px;
+  }
+
+  .banner-texto p {
+    font-size: 13px;
+    display: none;
+  }
+
+  .seta {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+}
+
+/* ===================== CATEGORIAS ===================== */
+.Categorias {
+  margin: 36px 30px 0;
+}
+
+.Categorias h3,
+.mangas h3,
+.Livros h3,
+.HQs h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Linha decorativa após os títulos das seções */
+.Categorias h3::after,
+.mangas h3::after,
+.Livros h3::after,
+.HQs h3::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 1px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tags span {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  padding: 7px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
+  color: #bbb;
+}
+
+.tags span:hover,
+.tags span.ativo {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.4);
+  color: #c084fc;
+}
+
+/* ===================== SEÇÕES ===================== */
+.mangas,
+.Livros,
+.HQs {
+  margin: 30px;
+}
+
+/* ===================== CARDS ===================== */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.card {
+  width: 175px;
+  background: #13131f;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 14px 36px rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.55);
+}
+
+.card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-info {
+  padding: 12px;
+}
+
+.card-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-info p {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 11px;
+}
+
+.card button {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 20px;
+  background: rgba(168, 85, 247, 0.1);
+  color: #c084fc;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.card button:hover {
+  background: #a855f7;
+  color: white;
+  border-color: #a855f7;
+}
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 14px 20px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .banner {
+    margin: 14px;
+  }
+
+  .banner img {
+    height: 260px;
+  }
+
+  .banner-texto {
+    left: 22px;
+    bottom: 24px;
+  }
+
+  .banner-texto h1 {
+    font-size: 26px;
+  }
+
+  .Categorias,
+  .mangas,
+  .Livros,
+  .HQs {
+    margin: 20px 14px;
+  }
+
+  .cards {
+    justify-content: center;
+  }
+}
+
+/* ===================== LAYOUT PRINCIPAL ===================== */
+.layout-principal {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 0 30px;
+}
+
+.coluna-cards {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ===================== SIDEBAR RANKING ===================== */
+.sidebar-ranking {
+  width: 260px;
+  flex-shrink: 0;
+  background: #13131f;
+  border-radius: 16px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+
+.ranking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.ranking-titulo {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ranking-subtitulo {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* LISTA */
+.ranking-lista {
+  list-style: none;
+  padding: 8px 0;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.ranking-lista::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ranking-lista::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 4px;
+}
+
+/* ITEM */
+.ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ranking-item:hover {
+  background: rgba(168, 85, 247, 0.08);
+}
+
+/* POSIÇÃO */
+.ranking-pos {
+  font-size: 14px;
+  font-weight: 800;
+  color: #555;
+  min-width: 20px;
+  text-align: center;
+}
+
+.ranking-pos.top3 {
+  color: #a855f7;
+  font-size: 16px;
+}
+
+/* CAPA MINIATURA */
+.ranking-item img {
+  width: 38px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* INFO */
+.ranking-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ranking-nome {
+  font-size: 13px;
+  font-weight: 600;
+  color: #eee;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* BADGES DE TIPO */
+.ranking-tipo {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  align-self: flex-start;
+}
+
+.ranking-tipo.manga {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.ranking-tipo.hq {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.ranking-tipo.livro {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+/* RESPONSIVO: sidebar some em telas pequenas */
+@media (max-width: 900px) {
+  .layout-principal {
+    flex-direction: column;
+    margin: 0 14px;
+  }
+
+  .sidebar-ranking {
+    width: 100%;
+    position: static;
+  }
+
+  .ranking-lista {
+    max-height: 320px;
+  }
+}
+
+/* ===================== ÍCONE DO CHAT ===================== */
+
+/* Tema aplicado pelo perfil */
+.navbar {
+  background: var(--cor-navbar);
+  border-bottom-color: var(--cor-borda);
+}
+
+.logo,
+.ranking-pos.top3 {
+  color: var(--cor-principal);
+}
+
+.menu a::after,
+.dot.ativo,
+.banner-texto button,
+.card button:hover {
+  background: var(--cor-principal);
+}
+
+#fotoPerfilNav {
+  border-color: var(--cor-principal);
+}
+
+#fotoPerfilNav:hover {
+  border-color: var(--cor-principal-clara);
+}
+
+.badge-categoria,
+.tags span:hover,
+.tags span.ativo,
+.ranking-tipo.manga {
+  background: var(--cor-destaque);
+  border-color: var(--cor-borda-hover);
+  color: var(--cor-principal-clara);
+}
+
+.card,
+.sidebar-ranking {
+  background: var(--cor-card);
+  border-color: var(--cor-borda);
+}
+
+.card:hover {
+  border-color: var(--cor-borda-hover);
+  box-shadow: 0 14px 36px var(--cor-destaque);
+}
+
+.card button {
+  background: var(--cor-destaque);
+  border-color: var(--cor-borda);
+  color: var(--cor-principal-clara);
+}
+
+.ranking-header,
+.ranking-item:hover {
+  background: var(--cor-destaque);
+}

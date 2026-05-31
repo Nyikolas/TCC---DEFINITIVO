@@ -1,0 +1,362 @@
+/* ===================== HERO DA BIBLIOTECA ===================== */
+.biblioteca-hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: linear-gradient(to bottom, #0d0d1f, #0d0d15);
+    border-bottom: 1px solid rgba(168, 85, 247, 0.1);
+}
+
+
+
+.titulo-busca {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 40%, var(--cor-principal, #a855f7));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroi-sub {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 32px;
+}
+
+/* ===================== BARRA DE PESQUISA ===================== */
+.barra-pesquisa {
+    display: flex;
+    align-items: center;
+    background: #12121e;
+    border-radius: 50px;
+    padding: 8px 8px 8px 22px;
+    border: 1px solid #2a2a3a;
+    max-width: 680px;
+    margin: 0 auto 24px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    gap: 10px;
+}
+
+.barra-pesquisa:focus-within {
+    border-color: var(--cor-principal, #a855f7);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.12);
+}
+
+.icone-busca {
+    color: #555;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.barra-pesquisa input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    flex: 1;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+}
+
+.barra-pesquisa input::placeholder { color: #444; }
+
+.btn-lupa {
+    background: var(--cor-principal, #a855f7);
+    color: #fff;
+    border: none;
+    padding: 11px 28px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s, transform 0.15s;
+    flex-shrink: 0;
+}
+
+.btn-lupa:hover  { opacity: 0.85; transform: scale(1.03); }
+.btn-lupa:active { transform: scale(0.98); }
+
+/* ===================== FILTROS ===================== */
+.filtros-rapidos {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
+    border: 1px solid #2a2a3a;
+    color: #888;
+    padding: 8px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.tag:hover {
+    border-color: var(--cor-principal, #a855f7);
+    color: var(--cor-principal, #a855f7);
+    background: rgba(168, 85, 247, 0.06);
+}
+
+.tag.ativo {
+    background: var(--cor-principal, #a855f7);
+    border-color: var(--cor-principal, #a855f7);
+    color: #fff;
+}
+
+/* ===================== CONTAINER DE RESULTADOS ===================== */
+.container-resultados {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 24px 80px;
+}
+
+.resultados-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.resultados-count {
+    font-size: 14px;
+    color: #666;
+}
+
+.select-ordem {
+    background: #12121e;
+    color: #ccc;
+    border: 1px solid #2a2a3a;
+    padding: 7px 14px;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.select-ordem:focus { border-color: var(--cor-principal, #a855f7); }
+
+/* ===================== GRID ===================== */
+.grid-resultados {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+    gap: 24px;
+}
+
+/* ===================== CARD ===================== */
+.card {
+    background: #12121e;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #1e1e2e;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border-color: var(--cor-principal, #a855f7);
+}
+
+/* ── Badge Novo / Popular ── */
+.card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 3;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    pointer-events: none;
+}
+
+.card-badge.popular {
+    background: rgba(245, 158, 11, 0.85);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+}
+
+.card-badge.novo {
+    background: rgba(16, 185, 129, 0.85);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+}
+
+/* ── Imagem com overlay ── */
+.card-img-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 270px;
+    flex-shrink: 0;
+}
+
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.card:hover .card-img-wrap img {
+    transform: scale(1.06);
+}
+
+/* Overlay com botão que aparece no hover */
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card:hover .card-overlay { opacity: 1; }
+
+.overlay-btn {
+    background: var(--cor-principal, #a855f7);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transform: translateY(8px);
+    transition: transform 0.3s;
+}
+
+.card:hover .overlay-btn { transform: translateY(0); }
+
+/* ── Info do card ── */
+.card-info {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.card-categoria {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--cor-principal, #a855f7);
+}
+
+.card-titulo {
+    font-size: 15px;
+    font-weight: 700;
+    color: #eee;
+    line-height: 1.3;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-autor {
+    font-size: 12px;
+    color: #666;
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Avaliação por estrelas ── */
+.card-avaliacao {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 6px;
+}
+
+.estrelas {
+    display: flex;
+    gap: 2px;
+}
+
+.estrelas i {
+    font-size: 11px;
+    color: #f59e0b;
+}
+
+.nota {
+    font-size: 13px;
+    font-weight: 700;
+    color: #f59e0b;
+}
+
+/* ── Cards gerados pela API (sem badge) ── */
+.card.api-card .card-badge { display: none; }
+
+/* ===================== ESTADO VAZIO ===================== */
+.grid-vazio {
+    text-align: center;
+    padding: 80px 20px;
+    color: #555;
+    grid-column: 1 / -1;
+}
+
+.grid-vazio span { font-size: 48px; display: block; margin-bottom: 16px; }
+.grid-vazio p    { font-size: 16px; margin-bottom: 6px; color: #888; }
+.grid-vazio small { font-size: 13px; }
+
+/* ===================== LOADING ===================== */
+.grid-loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: #555;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    grid-column: 1 / -1;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #1e1e2e;
+    border-top-color: var(--cor-principal, #a855f7);
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+/* ===================== RESPONSIVO ===================== */
+@media (max-width: 768px) {
+    .titulo-busca  { font-size: 26px; }
+    .biblioteca-hero { padding: 40px 16px 28px; }
+    .container-resultados { padding: 24px 16px 60px; }
+    .grid-resultados { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 16px; }
+    .card-img-wrap { height: 220px; }
+    .resultados-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+}

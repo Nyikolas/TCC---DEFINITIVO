@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCC - UniRead</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./src/imagens/Logo.jpg">
+    <script src="https://kit.fontawesome.com/5f3658a9e0.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="src/css/estilos.css">
+    <link rel="stylesheet" href="src/css/Lumi.css">
+    <link rel="stylesheet" href="src/css/perfil.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">UniRead</div>
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Biblioteca.html">Biblioteca</a></li>
+            <li><a href="Autores.html">Autores</a></li>
+            <li><a href="Lumi.html">Lumi</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="Perfil.html" class="Perfil">
+                <img id="fotoPerfilNav" src="https://i.pravatar.cc/40" alt="Foto de perfil">
+            </a>
+        </div>
+    </nav>
+
+    <!-- CONTEÚDO -->
+    <main class="main">
+
+        <!-- BANNER CARROSSEL -->
+        <section class="banner-carrossel">
+            <div class="slides-wrapper">
+
+                <div class="slide ativo">
+                    <img src="./src/imagens/one-piece-pictures-bjm9tdff9yzguoup.jpg" alt="One Piece">
+                    <div class="slide-overlay"></div>
+                    <div class="banner-texto">
+                        <span class="badge-categoria">Mangá</span>
+                        <h1>One Piece</h1>
+                        <p>A história de um garoto que quer se tornar o Rei dos Piratas</p>
+                        <button onclick="goToDescription('One Piece')">▶ Ler agora</button>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Berserk_vol01.png" alt="Berserk">
+                    <div class="slide-overlay"></div>
+                    <div class="banner-texto">
+                        <span class="badge-categoria">Mangá</span>
+                        <h1>Berserk</h1>
+                        <p>A jornada sombria de Guts, um guerreiro marcado pelo destino</p>
+                        <button onclick="goToDescription('Berserk')">▶ Ler agora</button>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_mose922j392el6h2q2c1nv8g7l/-S897-FWEBP"
+                        alt="Batman">
+                    <div class="slide-overlay"></div>
+                    <div class="banner-texto">
+                        <span class="badge-categoria">HQ</span>
+                        <h1>Batman</h1>
+                        <p>O cavaleiro das trevas protegendo Gotham do crime</p>
+                        <button onclick="goToDescription('Batman')">▶ Ler agora</button>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="https://m.media-amazon.com/images/I/51lkAKXgK4L._SY445_SX342_QL70_ML2_.jpg"
+                        alt="Senhor dos Anéis">
+                    <div class="slide-overlay"></div>
+                    <div class="banner-texto">
+                        <span class="badge-categoria">Livro</span>
+                        <h1>Senhor dos Anéis</h1>
+                        <p>Uma épica jornada pela Terra Média para destruir o Um Anel</p>
+                        <button onclick="goToDescription('Senhor Dos Anéis')">▶ Ler agora</button>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <img src="https://i2.wp.com/m.media-amazon.com/images/I/518dGmVCDfL.jpg?w=150&resize=150,200&ssl=1"
+                        alt="Game of Thrones">
+                    <div class="slide-overlay"></div>
+                    <div class="banner-texto">
+                        <span class="badge-categoria">Livro</span>
+                        <h1>Game of Thrones</h1>
+                        <p>A batalha pelo Trono de Ferro em um mundo de intrigas e dragões</p>
+                        <button onclick="goToDescription('Game of Thrones')">▶ Ler agora</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Setas -->
+            <button class="seta seta-esq" onclick="mudarSlide(-1)">&#8592;</button>
+            <button class="seta seta-dir" onclick="mudarSlide(1)">&#8594;</button>
+
+            <!-- Bolinhas indicadoras -->
+            <div class="indicadores">
+                <span class="dot ativo" onclick="irParaSlide(0)"></span>
+                <span class="dot" onclick="irParaSlide(1)"></span>
+                <span class="dot" onclick="irParaSlide(2)"></span>
+                <span class="dot" onclick="irParaSlide(3)"></span>
+                <span class="dot" onclick="irParaSlide(4)"></span>
+            </div>
+        </section>
+
+        <!-- Ícone do Chat -->
+        <div id="chatbot-icone" onclick="toggleChat()">
+            <i class="fa-solid fa-robot"></i>
+        </div>
+
+        <!-- CATEGORIAS -->
+        <section class="Categorias">
+            <h3>Hot Categories</h3>
+            <div class="tags">
+                <span>Todos</span>
+                <span>Shonen</span>
+                <span>Shojo</span>
+                <span>Seinen</span>
+                <span>Fantasia</span>
+                <span>Romance</span>
+                <span>Horror</span>
+                <span>ficção científica</span>
+                <span>Suspense</span>
+                <span>Medieval</span>
+                <span>Ação e Aventura</span>
+            </div>
+        </section>
+
+        <!-- LAYOUT PRINCIPAL: CARDS + RANKING -->
+        <div class="layout-principal">
+
+            <!-- COLUNA DOS CARDS -->
+            <div class="coluna-cards">
+
+                <!-- CONTINUE LENDO -->
+                <section class="mangas">
+                    <h3>Continue Lendo</h3>
+                    <div class="cards">
+                        <div class="card" onclick="goToDescription('Berserk')">
+                            <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Berserk_vol01.png" alt="Capa de Berserk">
+                            <div class="card-info">
+                                <h4>Berserk</h4>
+                                <p>380 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                        <div class="card" onclick="goToDescription('Solo Leveling')">
+                            <img
+                                src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_dapavu4fhd04bcjagc4v0sge0a/-S897-FWEBP" alt="Capa de Solo Leveling">
+                            <div class="card-info">
+                                <h4>Solo Leveling</h4>
+                                <p>200 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                        <div class="card" onclick="goToDescription('One Piece')">
+                            <img
+                                src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_mfpdoof6nd6ej6n2dlhtgsg660/-S897-FWEBP" alt="Capa de One Piece">
+                            <div class="card-info">
+                                <h4>One Piece</h4>
+                                <p>1151 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                        <div class="card" onclick="goToDescription('Boa Noite Punpun')">
+                            <img src="https://m.media-amazon.com/images/I/51EQ5jMPsHL._SY425_.jpg" alt="Capa de Boa Noite Punpun">
+                            <div class="card-info">
+                                <h4>Boa Noite Punpun</h4>
+                                <p>432 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                        <div class="card" onclick="goToDescription('Batman')">
+                            <img
+                                src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_mose922j392el6h2q2c1nv8g7l/-S897-FWEBP" alt="Capa de Batman">
+                            <div class="card-info">
+                                <h4>Batman</h4>
+                                <p>112 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MAIS POPULARES -->
+                <section class="Livros">
+                    <h3>Recomendados pra você</h3>
+                    <div class="cards">
+                        <div class="card" onclick="goToDescription('Game of Thrones')">
+                            <img
+                                src="https://i2.wp.com/m.media-amazon.com/images/I/518dGmVCDfL.jpg?w=150&resize=150,200&ssl=1" alt="Capa de Games Of Thrones">
+                            <div class="card-info">
+                                <h4>Games Of Thrones</h4>
+                                <p>592 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                        <div class="card" onclick="goToDescription('Tudo bem não estar tudo bem')">
+                            <img
+                                src="https://m.media-amazon.com/images/I/41VxKlcyCbL._SY445_SX342_ML2_.jpg" alt="Capa de Tudo bem não estar tudo bem">
+                            <div class="card-info">
+                                <h4>Tudo bem não estar tudo bem</h4>
+                                <p>240 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                        <div class="card" onclick="goToDescription('O Iluminado')">
+                            <img src="https://m.media-amazon.com/images/I/81Q+pJi4NjL._SY466_.jpg" alt="Capa de O Iluminado">
+                            <div class="card-info">
+                                <h4>O Iluminado</h4>
+                                <p>520 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                        <div class="card" onclick="goToDescription('O Homem de Giz')">
+                            <img src="https://m.media-amazon.com/images/I/71oxE2vkZmL._SY466_.jpg" alt="Capa de O Homem de Giz">
+                            <div class="card-info">
+                                <h4>O Homem de Giz</h4>
+                                <p>271 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                        <div class="card" onclick="goToDescription('Senhor Dos Anéis')">
+                            <img src="https://m.media-amazon.com/images/I/51lkAKXgK4L._SY445_SX342_QL70_ML2_.jpg" alt="Capa de Senhor dos Aneis">
+                            <div class="card-info">
+                                <h4>Senhor dos Aneis</h4>
+                                <p>1961 Capitulos</p>
+                                <button>Ler agora</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <!-- FIM COLUNA CARDS -->
+
+            <!-- SIDEBAR RANKING -->
+            <aside class="sidebar-ranking">
+                <div class="ranking-header">
+                    <span class="ranking-titulo">🏆 Top 10</span>
+                    <span class="ranking-subtitulo">Mais lidos</span>
+                </div>
+
+                <ul class="ranking-lista">
+
+                    <li class="ranking-item" onclick="goToDescription('One Piece')">
+                        <span class="ranking-pos top3">1</span>
+                        <img src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_mfpdoof6nd6ej6n2dlhtgsg660/-S897-FWEBP"
+                            alt="One Piece">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">One Piece</span>
+                            <span class="ranking-tipo manga">Mangá</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('Boa Noite Punpun')">
+                        <span class="ranking-pos top3">2</span>
+                        <img src="https://m.media-amazon.com/images/I/51EQ5jMPsHL._SY425_.jpg" alt="Boa Noite Punpun">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">Boa Noite Punpun</span>
+                            <span class="ranking-tipo manga">Mangá</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('Solo Leveling')">
+                        <span class="ranking-pos top3">3</span>
+                        <img src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_dapavu4fhd04bcjagc4v0sge0a/-S897-FWEBP"
+                            alt="Solo Leveling">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">Solo Leveling</span>
+                            <span class="ranking-tipo manga">Mangá</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('Batman')">
+                        <span class="ranking-pos">4</span>
+                        <img src="https://d14d9vp3wdof84.cloudfront.net/image/589816272436/image_mose922j392el6h2q2c1nv8g7l/-S897-FWEBP"
+                            alt="Batman">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">Batman</span>
+                            <span class="ranking-tipo hq">HQ</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('Game of Thrones')">
+                        <span class="ranking-pos">5</span>
+                        <img src="https://i2.wp.com/m.media-amazon.com/images/I/518dGmVCDfL.jpg?w=150&resize=150,200&ssl=1"
+                            alt="Game of Thrones">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">Game of Thrones</span>
+                            <span class="ranking-tipo livro">Livro</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('Senhor Dos Anéis')">
+                        <span class="ranking-pos">6</span>
+                        <img src="https://m.media-amazon.com/images/I/51lkAKXgK4L._SY445_SX342_QL70_ML2_.jpg"
+                            alt="Senhor dos Anéis">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">Senhor dos Anéis</span>
+                            <span class="ranking-tipo livro">Livro</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('O Iluminado')">
+                        <span class="ranking-pos">7</span>
+                        <img src="https://m.media-amazon.com/images/I/81Q+pJi4NjL._SY466_.jpg"
+                            alt="O Iluminado">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">O Iluminado</span>
+                            <span class="ranking-tipo livro">Livro</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('O Homem de Giz')">
+                        <span class="ranking-pos">8</span>
+                        <img src="https://m.media-amazon.com/images/I/71oxE2vkZmL._SY466_.jpg"
+                            alt="O Homem de Giz">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">O Homem de Giz</span>
+                            <span class="ranking-tipo livro">Livro</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('Berserk')">
+                        <span class="ranking-pos">9</span>
+                        <img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Berserk_vol01.png" alt="Berserk">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">Berserk</span>
+                            <span class="ranking-tipo manga">Mangá</span>
+                        </div>
+                    </li>
+
+                    <li class="ranking-item" onclick="goToDescription('Tudo bem não estar tudo bem')">
+                        <span class="ranking-pos">10</span>
+                        <img src="https://m.media-amazon.com/images/I/41VxKlcyCbL._SY445_SX342_ML2_.jpg"
+                            alt="Tudo bem não estar tudo bem">
+                        <div class="ranking-info">
+                            <span class="ranking-nome">Tudo bem não estar tudo bem</span>
+                            <span class="ranking-tipo livro">Livro</span>
+                        </div>
+                    </li>
+
+                </ul>
+            </aside>
+            <!-- FIM SIDEBAR -->
+
+        </div>
+        <!-- FIM LAYOUT PRINCIPAL -->
+
+    </main>
+
+    <!-- SCRIPT -->
+    <script src="./src/Js/index.js"></script>
+    <script src="./src/Js/Lumi.js"></script>
+    <script src="src/Js/Recompensas.js"></script>
+    <script src="src/Js/Perfil.js"></script>
+    <script>
+        function goToDescription(title) {
+            window.location.href = 'Descrição.html?title=' + encodeURIComponent(title);
+        }
+    </script>
+</body>
+
+</html>

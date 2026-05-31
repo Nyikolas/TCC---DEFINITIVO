@@ -1,0 +1,230 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* BODY */
+body {
+  background-color: #0d0d12;
+  color: white;
+}
+
+
+.login-container {
+    background-color: #0f0a19; /* Fundo escuro do site */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    background: #1a1228; /* Fundo do card */
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #2d1b4e; /* Borda roxa sutil */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+.lumo-logo img {
+    width: 40px;
+    height: 40px;
+}
+.lumi-logo {
+    background: #311d4d;
+    width: 95px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    margin: 0 auto 15px;
+    color: #a855f7; /* Roxo Lumi */
+    font-size: 1.8rem;
+}
+
+
+
+.login-header h2 {
+    color: white;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.login-header p {
+    color: #94a3b8; /* Cinza para o texto secundário */
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+/* Campos de Input */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: white;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.input-field {
+    background: #0f0a19;
+    border: 1px solid #2d1b4e;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    transition: 0.3s;
+}
+
+/* Quando o usuário clica no campo */
+.input-field {
+    border-color: #a855f7;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.2);
+}
+
+
+.input-field input {
+    background: transparent;
+    border: none;
+    color: #a855f7;
+    padding: 12px 0;
+    width: 100%;
+    outline: none;
+}
+
+.forgot-pass {
+    text-align: right;
+    margin-bottom: 25px;
+}
+
+.forgot-pass a {
+    color: #a855f7;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+/* Botão de Login */
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #a855f7 0%, #8b5cf6 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 25px;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.signup-link a {
+    color: #a855f7;
+     text-decoration: none;
+    font-weight: 600;
+
+}	        
+
+/* mensagem de erro/aviso */
+.login-box .error {
+    color: #c0392b;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    min-height: 20px;
+}
+.fa-regular.fa-user {
+    color: #7849cd; /* Borda roxa sutil */
+
+}
+
+.fa-solid.fa-lock {
+    color: #7849cd;
+}
+
+.fa-solid.fa-envelope {
+    color: #7849cd;
+}
+
+/* ABAS/TABS */
+.tabs-container {
+    display: flex;
+    gap: 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #2d1b4e;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 0;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    position: relative;
+}
+
+.tab-btn:hover {
+    color: #a855f7;
+}
+
+.tab-btn.active {
+    color: #a855f7;
+    border-bottom-color: #a855f7;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
