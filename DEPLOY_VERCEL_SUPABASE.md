@@ -72,3 +72,13 @@ https://seu-projeto.vercel.app/api/manga/buscar?titulo=one%20piece
 ```
 
 Se retornar JSON com `mangas`, MangaDex esta funcionando.
+
+Se retornar HTML com `NOT_FOUND`, a Vercel nao esta usando os arquivos novos de `api/`.
+Confira:
+
+```text
+Project Settings > General > Root Directory
+```
+
+Deve apontar para a raiz do projeto, onde ficam `api/`, `backend/`, `src/` e `index.html`.
+Depois faca novo deploy.
