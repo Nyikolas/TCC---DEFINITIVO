@@ -116,43 +116,25 @@ function ehManga(data) {
 }
 
 async function buscarMangaDex(title) {
-  const json = await fetchJson(`${API_BASE}/manga/buscar?titulo=${encodeURIComponent(title)}`);
+  const res = await fetch(`${API_BASE}/manga/buscar?titulo=${encodeURIComponent(title)}`);
+  const json = await res.json();
+
+  if (!res.ok) {
+    throw new Error(json.erro || 'Erro ao buscar MangaDex');
+  }
+
   return json.mangas?.[0] || null;
 }
 
 async function buscarCapitulosMangaDex(mangaId) {
-  const json = await fetchJson(`${API_BASE}/manga/${mangaId}/capitulos`);
-  return json.capitulos || [];
-}
-
-async function fetchJson(url, options) {
-  const res = await fetch(url, options);
-  const text = await res.text();
-  let json = {};
-
-  if (text) {
-    try {
-      json = JSON.parse(text);
-    } catch {
-      throw new Error(`Resposta nao JSON de ${url}: HTTP ${res.status} ${resumirResposta(text)}`);
-    }
-  }
+  const res = await fetch(`${API_BASE}/manga/${mangaId}/capitulos`);
+  const json = await res.json();
 
   if (!res.ok) {
-    throw new Error(json.detalhe || json.erro || json.error || `HTTP ${res.status}`);
+    throw new Error(json.erro || 'Erro ao buscar capitulos');
   }
 
-  return json;
-}
-
-function resumirResposta(texto) {
-  return String(texto)
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 180);
+  return json.capitulos || [];
 }
 
 function montarHrefLeitura(data, capituloIndex = 0) {
