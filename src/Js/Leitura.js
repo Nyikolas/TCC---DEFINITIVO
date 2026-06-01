@@ -94,13 +94,33 @@ async function buscarPaginas(chapterId) {
 async function fetchJson(url, options) {
   const res = await fetch(url, options);
   const text = await res.text();
-  const json = text ? JSON.parse(text) : {};
+  // Tenta extrair JSON mesmo em respostas de erro, para mensagens mais claras (e ussi)
+  let json = {};
+
+  if (text) {
+    try {
+      json = JSON.parse(text);
+    } catch {
+      throw new Error(`Resposta nao JSON de ${url}: HTTP ${res.status} ${resumirResposta(text)}`);
+    }
+  }
 
   if (!res.ok) {
     throw new Error(json.detalhe || json.erro || json.error || `HTTP ${res.status}`);
   }
 
   return json;
+}
+
+// Remove tags HTML e scripts para evitar poluição visual no resumo de erros (so acidionou isso)
+function resumirResposta(texto) {
+  return String(texto)
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 180);
 }
 
 async function salvarProgressoSupabase(mangaId, chapterId, pagina) {
@@ -202,7 +222,7 @@ async function carregarCapitulo(index) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
     console.error('[capitulo]', err);
-    mostrarErro('Erro ao carregar paginas do capitulo.');
+    mostrarErro(`Erro ao carregar paginas do capitulo: ${escapeHtml(err.message)}`);
   } finally {
     mostrarLoading(false);
   }
