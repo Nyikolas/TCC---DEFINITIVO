@@ -30,6 +30,9 @@ vercel
 vercel --prod
 ```
 
+No plano Hobby, deixe somente `api/index.js` como Vercel Function.
+O arquivo `vercel.json` reescreve `/api/...` para essa unica function.
+
 ## 4. Rotas principais
 
 MangaDex:

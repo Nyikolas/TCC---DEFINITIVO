@@ -23,64 +23,13 @@ async function startFakeMangaDex(handler) {
   return { baseUrl, close: () => server.close() };
 }
 
-function createMockResponse() {
-  const response = {
-    statusCode: 200,
-    headers: {},
-    body: undefined,
-    status(code) {
-      this.statusCode = code;
-      return this;
-    },
-    setHeader(name, value) {
-      this.headers[name.toLowerCase()] = value;
-      return this;
-    },
-    json(body) {
-      this.setHeader('content-type', 'application/json');
-      this.body = body;
-      return this;
-    },
-    send(body) {
-      this.body = body;
-      return this;
-    },
-  };
-
-  return response;
+async function startVercelFunction(handler) {
+  const server = http.createServer((req, res) => handler(req, res));
+  const baseUrl = await listen(server);
+  return { baseUrl, close: () => server.close() };
 }
 
-async function call(handler, req) {
-  const res = createMockResponse();
-  await handler(req, res);
-  return res;
-}
-
-test('adapters Vercel exportam handlers validos', async () => {
-  const adapterPaths = [
-    '../../api/index.js',
-    '../../api/login.js',
-    '../../api/signup.js',
-    '../../api/profile/[id].js',
-    '../../api/favoritos/add.js',
-    '../../api/favoritos/remove.js',
-    '../../api/favoritos/[usuario_id].js',
-    '../../api/progresso.js',
-    '../../api/progresso/[mangaId].js',
-    '../../api/manga/buscar.js',
-    '../../api/manga/[mangaId].js',
-    '../../api/manga/[mangaId]/capitulos.js',
-    '../../api/capitulo/[chapterId]/paginas.js',
-    '../../api/imagem.js',
-  ];
-
-  for (const adapterPath of adapterPaths) {
-    const mod = await import(adapterPath);
-    assert.equal(typeof mod.default, 'function', adapterPath);
-  }
-});
-
-test('rotas MangaDex existem como adapters Vercel explicitos', async (t) => {
+test('rota Vercel unica atende MangaDex depois do rewrite', async (t) => {
   const fakeMangaDex = await startFakeMangaDex((url, res) => {
     if (url.pathname === '/manga') {
       sendJson(res, 200, {
@@ -134,36 +83,27 @@ test('rotas MangaDex existem como adapters Vercel explicitos', async (t) => {
 
   process.env.MANGADEX_BASE = fakeMangaDex.baseUrl;
 
-  const buscar = (await import('../../api/manga/buscar.js')).default;
-  const capitulos = (await import('../../api/manga/[mangaId]/capitulos.js')).default;
-  const paginas = (await import('../../api/capitulo/[chapterId]/paginas.js')).default;
+  const handler = (await import('../../api/index.js')).default;
+  const api = await startVercelFunction(handler);
+  t.after(api.close);
 
-  const buscaRes = await call(buscar, {
-    method: 'GET',
-    url: '/api/manga/buscar?titulo=One%20Piece',
-    query: { titulo: 'One Piece' },
-  });
+  const buscaRes = await fetch(`${api.baseUrl}/api/index.js?path=manga/buscar&titulo=One%20Piece`);
+  const buscaBody = await buscaRes.json();
 
-  assert.equal(buscaRes.statusCode, 200);
-  assert.equal(buscaRes.body.mangas[0].id, 'one-piece-id');
+  assert.equal(buscaRes.status, 200);
+  assert.equal(buscaBody.mangas[0].id, 'one-piece-id');
 
-  const capitulosRes = await call(capitulos, {
-    method: 'GET',
-    url: '/api/manga/one-piece-id/capitulos',
-    query: { mangaId: 'one-piece-id' },
-  });
+  const capitulosRes = await fetch(`${api.baseUrl}/api/index.js?path=manga/one-piece-id/capitulos`);
+  const capitulosBody = await capitulosRes.json();
 
-  assert.equal(capitulosRes.statusCode, 200);
-  assert.equal(capitulosRes.body.capitulos[0].id, 'chapter-1');
+  assert.equal(capitulosRes.status, 200);
+  assert.equal(capitulosBody.capitulos[0].id, 'chapter-1');
 
-  const paginasRes = await call(paginas, {
-    method: 'GET',
-    url: '/api/capitulo/chapter-1/paginas',
-    query: { chapterId: 'chapter-1' },
-  });
+  const paginasRes = await fetch(`${api.baseUrl}/api/index.js?path=capitulo/chapter-1/paginas`);
+  const paginasBody = await paginasRes.json();
 
-  assert.equal(paginasRes.statusCode, 200);
-  assert.deepEqual(paginasRes.body.paginas, [
+  assert.equal(paginasRes.status, 200);
+  assert.deepEqual(paginasBody.paginas, [
     'https://uploads.example/data/hash-1/001.jpg',
   ]);
 });
