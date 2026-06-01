@@ -1,4 +1,13 @@
-const API_BASE = '/api';
+const API_BASE = getApiBase();
+
+function getApiBase() {
+  if (window.UNIREAD_API_BASE) return window.UNIREAD_API_BASE;
+  const local = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+  if (window.location.protocol === 'file:' || (local && window.location.port !== '3000')) {
+    return 'http://localhost:3000/api';
+  }
+  return '/api';
+}
 
 let currentMangaId = null;
 let currentTitle = 'Obra';
@@ -36,7 +45,7 @@ async function initializeReader() {
       }
     } catch (err) {
       console.error('[buscar manga por titulo]', err);
-      mostrarErro('Backend desligado ou MangaDex indisponivel. Tente novamente em instantes.');
+      mostrarErro(`Backend ou MangaDex indisponivel: ${escapeHtml(err.message)}`);
       mostrarLoading(false);
       return;
     }
@@ -61,34 +70,37 @@ async function initializeReader() {
     await carregarCapitulo(Number(params.get('capitulo') || 0));
   } catch (err) {
     console.error('[leitura]', err);
-    mostrarErro('Erro ao carregar a obra. Verifique se o backend esta respondendo.');
+    mostrarErro(`Erro ao carregar a obra: ${escapeHtml(err.message)}`);
   } finally {
     mostrarLoading(false);
   }
 }
 
 async function buscarMangaPorTitulo(title) {
-  const res = await fetch(`${API_BASE}/manga/buscar?titulo=${encodeURIComponent(title)}`);
-  const json = await res.json();
-
-  if (!res.ok) throw new Error(json.erro || 'Erro ao buscar manga');
+  const json = await fetchJson(`${API_BASE}/manga/buscar?titulo=${encodeURIComponent(title)}`);
   return json.mangas?.[0] || null;
 }
 
 async function carregarCapitulos(mangaId) {
-  const res = await fetch(`${API_BASE}/manga/${mangaId}/capitulos`);
-  const json = await res.json();
-
-  if (!res.ok) throw new Error(json.erro || 'Erro ao buscar capitulos');
+  const json = await fetchJson(`${API_BASE}/manga/${mangaId}/capitulos`);
   currentChapters = json.capitulos || [];
 }
 
 async function buscarPaginas(chapterId) {
-  const res = await fetch(`${API_BASE}/capitulo/${chapterId}/paginas`);
-  const json = await res.json();
-
-  if (!res.ok) throw new Error(json.erro || 'Erro ao buscar paginas');
+  const json = await fetchJson(`${API_BASE}/capitulo/${chapterId}/paginas`);
   return json.paginas || [];
+}
+
+async function fetchJson(url, options) {
+  const res = await fetch(url, options);
+  const text = await res.text();
+  const json = text ? JSON.parse(text) : {};
+
+  if (!res.ok) {
+    throw new Error(json.detalhe || json.erro || json.error || `HTTP ${res.status}`);
+  }
+
+  return json;
 }
 
 async function salvarProgressoSupabase(mangaId, chapterId, pagina) {

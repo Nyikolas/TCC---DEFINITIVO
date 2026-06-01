@@ -73,6 +73,30 @@ function atualizarXP() {
     if (elBarra) elBarra.style.width = Math.min(progresso, 100) + '%';
 }
 
+function aplicarPerfilRemoto(perfil) {
+    if (!perfil) return;
+
+    let xpRemoto = Number(perfil.xp);
+    const nivelRemoto = Number(perfil.nivel);
+    if (Number.isFinite(nivelRemoto) && nivelRemoto > 1) {
+        const nivelAnterior = NIVEIS.find(n => n.nivel === nivelRemoto - 1);
+        xpRemoto = Math.max(Number.isFinite(xpRemoto) ? xpRemoto : 0, nivelAnterior?.xpMax || 0);
+    }
+
+    if (Number.isFinite(xpRemoto)) {
+        xpTotal = xpRemoto;
+        localStorage.setItem('xpTotal', String(xpTotal));
+    }
+
+    atualizarXP();
+}
+
+function salvarPerfilRemoto() {
+    if (typeof window.salvarPerfilRemoto === 'function') {
+        window.salvarPerfilRemoto();
+    }
+}
+
 function getConquistasDesbloqueadasPerfil() {
     return JSON.parse(localStorage.getItem('conquistasDesbloqueadas') || '[]');
 }
@@ -115,6 +139,7 @@ function tentarDesbloquear(conquista) {
     xpTotal += conquista.xpRecompensa;
     localStorage.setItem('xpTotal', xpTotal);
     atualizarXP();
+    salvarPerfilRemoto();
 
     mostrarToast(`Conquista desbloqueada: ${conquista.titulo}! +${conquista.xpRecompensa} XP`);
 
@@ -187,6 +212,7 @@ function testarConquista() {
     xpTotal += 20;
     localStorage.setItem('xpTotal', xpTotal);
     atualizarXP();
+    salvarPerfilRemoto();
 
     CONQUISTAS.forEach(conquista => {
         const progresso = parseInt(localStorage.getItem(conquista.chave) || '0', 10);
@@ -223,6 +249,7 @@ function resetarTudo() {
 
     if (typeof atualizarAvatarPagina === 'function') atualizarAvatarPagina('nenhuma');
     if (typeof renderizarCardRecompensas === 'function') renderizarCardRecompensas();
+    salvarPerfilRemoto();
 
     mostrarToast('Tudo resetado com sucesso!');
 }

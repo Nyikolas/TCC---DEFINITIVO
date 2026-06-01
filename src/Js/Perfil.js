@@ -8,6 +8,17 @@
 //    5. Atualização das estatísticas na tela
 // =====================================================================
 
+const PERFIL_API_BASE = getPerfilApiBase();
+
+function getPerfilApiBase() {
+    if (window.UNIREAD_API_BASE) return window.UNIREAD_API_BASE;
+    const local = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+    if (window.location.protocol === 'file:' || (local && window.location.port !== '3000')) {
+        return 'http://localhost:3000/api';
+    }
+    return '/api';
+}
+
 // ─────────────────────────────────────────────
 //  BOTÕES DE NAVEGAÇÃO
 // ─────────────────────────────────────────────
@@ -18,6 +29,9 @@ document.getElementById('logoutBtn')?.addEventListener('click', function () {
 
 document.getElementById('sairBtn')?.addEventListener('click', function () {
     localStorage.removeItem('logged');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+    localStorage.removeItem('userEmail');
     window.location.href = 'Login.html';
 });
 
@@ -37,6 +51,70 @@ const uploadFoto      = document.getElementById('uploadFoto');
     if (fotoPerfilNav) fotoPerfilNav.src = fotoSalva;
 })();
 
+async function carregarPerfilRemoto() {
+    const userId = localStorage.getItem('userId');
+    const nomeSalvo = localStorage.getItem('username');
+    const nomeUsuario = document.getElementById('nomeUsuario');
+
+    if (nomeSalvo && nomeUsuario) nomeUsuario.textContent = nomeSalvo;
+    if (!userId) return;
+
+    try {
+        const res = await fetch(`${PERFIL_API_BASE}/profile/${userId}`);
+        const perfil = await res.json();
+
+        if (!res.ok) throw new Error(perfil.error || 'Erro ao buscar perfil');
+
+        const nome = perfil.nome || perfil.username || nomeSalvo || 'Usuario';
+        if (nomeUsuario) nomeUsuario.textContent = nome;
+        localStorage.setItem('username', nome);
+
+        if (perfil.fotoPerfil) {
+            localStorage.setItem('userAvatar', perfil.fotoPerfil);
+            if (fotoPerfil) fotoPerfil.src = perfil.fotoPerfil;
+            if (fotoPerfilNav) fotoPerfilNav.src = perfil.fotoPerfil;
+        }
+
+        const xpLocal = Number(localStorage.getItem('xpTotal') || '0');
+        const xpRemoto = Number(perfil.xp || '0');
+
+        if (xpLocal > xpRemoto) {
+            await salvarPerfilRemoto();
+        } else if (typeof aplicarPerfilRemoto === 'function') {
+            aplicarPerfilRemoto(perfil);
+        }
+    } catch (err) {
+        console.warn('[perfil remoto]', err);
+    }
+}
+
+async function salvarPerfilRemoto() {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    const nome = localStorage.getItem('username') || document.getElementById('nomeUsuario')?.textContent || 'Usuario';
+    const fotoPerfilAtual = localStorage.getItem('userAvatar') || fotoPerfil?.src || null;
+    const xp = Number(localStorage.getItem('xpTotal') || '0');
+    const nivel = Number(document.getElementById('nivelAtual')?.textContent || '1');
+
+    try {
+        const res = await fetch(`${PERFIL_API_BASE}/profile/${userId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, fotoPerfil: fotoPerfilAtual, xp, nivel }),
+        });
+
+        if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data.error || 'Erro ao salvar perfil');
+        }
+    } catch (err) {
+        console.warn('[salvar perfil remoto]', err);
+    }
+}
+
+window.salvarPerfilRemoto = salvarPerfilRemoto;
+
 // Clique no container → abre seletor de arquivo
 avatarContainer?.addEventListener('click', () => uploadFoto?.click());
 
@@ -51,6 +129,7 @@ uploadFoto?.addEventListener('change', function () {
         if (fotoPerfil)    fotoPerfil.src    = src;
         if (fotoPerfilNav) fotoPerfilNav.src = src;
         localStorage.setItem('userAvatar', src);
+        salvarPerfilRemoto();
 
         // Atualiza também os mini-avatares do card de recompensas (se visíveis)
         document.querySelectorAll('.slot-foto').forEach(img => img.src = src);
@@ -105,3 +184,5 @@ uploadFoto?.addEventListener('change', function () {
     if (elHoras) elHoras.textContent = horasLidas + 'h';
     // statDias pode ser implementado com lógica de streak futuramente
 })();
+
+document.addEventListener('DOMContentLoaded', carregarPerfilRemoto);

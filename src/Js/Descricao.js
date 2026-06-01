@@ -100,7 +100,16 @@ if (chaveSenhorDosAneis) {
 }
 
 
-const API_BASE = '/api';
+const API_BASE = getApiBase();
+
+function getApiBase() {
+  if (window.UNIREAD_API_BASE) return window.UNIREAD_API_BASE;
+  const local = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+  if (window.location.protocol === 'file:' || (local && window.location.port !== '3000')) {
+    return 'http://localhost:3000/api';
+  }
+  return '/api';
+}
 
 function ehManga(data) {
   return data?.categoria?.toLowerCase().includes('mang');

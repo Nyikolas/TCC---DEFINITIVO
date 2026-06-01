@@ -58,14 +58,24 @@ export async function findProfile(userId) {
   return mapProfile(data);
 }
 
-export async function updateProfile(userId, { nome, fotoPerfil }) {
+export async function updateProfile(userId, { nome, fotoPerfil, xp, nivel }) {
   const client = requireSupabase();
+  const updates = {
+    nome,
+    foto_perfil: fotoPerfil,
+  };
+
+  if (Number.isFinite(Number(xp))) {
+    updates.xp = Number(xp);
+  }
+
+  if (Number.isFinite(Number(nivel))) {
+    updates.nivel = Number(nivel);
+  }
+
   const { error } = await client
     .from('usuarios')
-    .update({
-      nome,
-      foto_perfil: fotoPerfil,
-    })
+    .update(updates)
     .eq('id', userId);
 
   throwIfError(error);

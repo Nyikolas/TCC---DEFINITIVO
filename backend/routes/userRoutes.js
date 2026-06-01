@@ -19,14 +19,14 @@ export function createUserRoutes({ usersRepository = defaultUsersRepository } = 
   });
 
   router.put('/profile/:id', async (req, res) => {
-    const { nome, fotoPerfil } = req.body;
+    const { nome, fotoPerfil, xp, nivel } = req.body;
 
     if (!nome) {
       return res.status(400).json({ error: 'Nome e obrigatorio' });
     }
 
     try {
-      await usersRepository.updateProfile(req.params.id, { nome, fotoPerfil });
+      await usersRepository.updateProfile(req.params.id, { nome, fotoPerfil, xp, nivel });
       res.status(200).json({ message: 'Perfil atualizado com sucesso!' });
     } catch (err) {
       return sendRepositoryError(res, err, 'Erro ao atualizar perfil');

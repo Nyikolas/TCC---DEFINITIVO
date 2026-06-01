@@ -16,7 +16,7 @@ router.get('/manga/buscar', async (req, res) => {
     res.json({ mangas: resultado });
   } catch (err) {
     console.error('[buscar manga]', err.message);
-    res.status(500).json({ erro: 'Erro ao buscar mangas' });
+    res.status(500).json({ erro: 'Erro ao buscar mangas', detalhe: err.message });
   }
 });
 
@@ -36,7 +36,7 @@ router.get('/manga/:mangaId/capitulos', async (req, res) => {
     res.json({ capitulos });
   } catch (err) {
     console.error('[listar capitulos]', err.message);
-    res.status(500).json({ erro: 'Erro ao listar capitulos' });
+    res.status(500).json({ erro: 'Erro ao listar capitulos', detalhe: err.message });
   }
 });
 
@@ -46,7 +46,7 @@ router.get('/capitulo/:chapterId/paginas', async (req, res) => {
     res.json({ paginas });
   } catch (err) {
     console.error('[buscar paginas]', err.message);
-    res.status(500).json({ erro: 'Erro ao buscar paginas do capitulo' });
+    res.status(500).json({ erro: 'Erro ao buscar paginas do capitulo', detalhe: err.message });
   }
 });
 

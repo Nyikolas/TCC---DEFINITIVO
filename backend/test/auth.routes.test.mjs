@@ -85,3 +85,37 @@ test('login valida senha pelo hash salvo no repositorio', async (t) => {
   assert.equal(body.user.username, 'Jacare');
   assert.equal(body.user.email, 'jacare@example.com');
 });
+
+test('perfil atualiza nome, foto, xp e nivel pelo repositorio', async (t) => {
+  let updatedProfile = null;
+  const usersRepository = {
+    async updateProfile(userId, profile) {
+      assert.equal(userId, 'user-1');
+      updatedProfile = profile;
+    },
+  };
+
+  const app = await startApp({ usersRepository });
+  t.after(app.close);
+
+  const res = await fetch(`${app.baseUrl}/api/profile/user-1`, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      nome: 'Nykolas',
+      fotoPerfil: 'avatar.png',
+      xp: 140,
+      nivel: 2,
+    }),
+  });
+  const body = await res.json();
+
+  assert.equal(res.status, 200);
+  assert.equal(body.message, 'Perfil atualizado com sucesso!');
+  assert.deepEqual(updatedProfile, {
+    nome: 'Nykolas',
+    fotoPerfil: 'avatar.png',
+    xp: 140,
+    nivel: 2,
+  });
+});
